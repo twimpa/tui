@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<title>TWIP - Templates'</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:400" rel="stylesheet"> 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<link rel="stylesheet" href="./css/twip_menu.css">
+<link rel="stylesheet" href="./css/twip.css">
+<script type="text/javascript" src="./javascripts/twip.js"></script>
+
+
+</head>
+<body>
+<nav>
+  <div>
+    <a class="logo" href="#"></a> 
+  </div> 
+  <div class="scrollbar" id="style-1">
+  <ul class="topmenu"></ul>
+  </div> 
+</nav>
+
+<main>
+</main>
+
+<script type="text/javascript">
+
+  'use strict';
+
+  ////// CREATE MENUBAR //////
+
+  const createTopMenu = (subtree) => {
+    let ulist = document.createElement('ul');
+    // For all children of submenu
+    subtree.children.forEach( (child) => {
+      let subelement = (child.type === 'item') ? createItem(child) : createSubMenu(child);
+      ulist.appendChild(subelement);
+    });
+    return ulist;
+  }
+
+  const createSubMenu = (subtree) => {
+    console.log(subtree.type,subtree.label);
+    let header = document.createElement('li');
+    header.className = 'submenu';
+    header.innerHTML = `<a href="#">${subtree.icon}<span class="nav-text">${subtree.label}</span></a>`;
+    let ulist = document.createElement('ul');
+    header.appendChild(ulist);
+    // For all children of submenu
+    subtree.children.forEach( (child) => {
+      let subelement = (child.type === 'item') ? createItem(child) : createSubMenu(child);
+      ulist.appendChild(subelement);
+    });
+    return header;
+  }
+
+  const createItem = (item) => {
+    let _item = document.createElement('li');
+    _item.className = 'item';
+    let _link = document.createElement('a');
+    _link.addEventListener('click',createNewNode(item.onclick));
+    _link.innerHTML = `${(item.icon) ? item.icon : ''}<span class="nav-text">${item.label}</span>`;
+    _item.appendChild(_link);
+    return _item;
+  }
+
+  const createMenu = (tree) => {
+    let nav = document.querySelector('.scrollbar');
+    console.log(tree);
+    let ulist = createTopMenu(tree);
+    nav.prepend(ulist);
+  }
+
+  const createNewNode = (nodetype) => (evt) => {
+    console.log('New node ' + nodetype);
+    TWIP.graph.appendNodeByName(nodetype,-1,{x:evt.pageX,y:evt.pageY});
+  }
+  ////// MAIN //////
+
+  let main = document.querySelector('main');
+
+  fetch('./data/menu.json', {
+      method: 'GET',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      mode: 'cors',
+      cache: 'default'
+    }
+  )
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })
+  .then ( menus => {
+    createMenu(menus);
+
+    // Then create nodes...
+    return fetch('./data/nodes.json', {
+        method: 'GET',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        mode: 'cors',
+        cache: 'default'
+      }
+    )
+  })
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })
+  .then ( nodeTemplates => {
+    console.log(nodeTemplates);
+
+    // Create Edges
+    let svg = document.createElementNS(xmlns,'svg');
+    svg.setAttribute('width','100%');
+    svg.setAttribute('height','100%');
+
+    main.prepend(svg);
+    let boardgame = document.createElement('div');
+    boardgame.id = 'board';
+    boardgame.className = 'board';
+    main.appendChild(boardgame);
+
+    // Create Graph
+    TWIP.nodeTemplates = nodeTemplates;
+    TWIP.graph.setTemplates(nodeTemplates);
+    TWIP.graph.setRootNode(boardgame);
+    TWIP.graph.setGraphicsContext(svg);
+
+    for (let n =0; n < nodeTemplates.length; n++) {
+      TWIP.graph.appendNode(nodeTemplates[n].id);
+    }
+  }); 
+
+</script>
+</body>
+</html>

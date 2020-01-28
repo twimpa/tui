@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<title>TWIP GUI</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet"> 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link rel="stylesheet" href="./css/twip_menu.css">
+<link rel="stylesheet" href="./css/twip.css">
+<script type="text/javascript" src="./javascripts/twip.js"></script>
+
+</head>
+<body>
+<main>
+</main>
+
+<script type="text/javascript">
+  'use strict';
+
+  const menu_item = (parent,menu) => {
+
+    if (menu.children !== undefined) {
+      let ul = document.createElement('ol');
+      ul.className = menu.type;
+      parent.append(ul);
+      for ( let item of menu.children) {
+        console.log(item);
+        let li = document.createElement('li');
+        ul.append(li);
+        li.id = item.id;
+        li.className = 'menu-item';
+        let a = document.createElement('a');
+        li.append(a);
+        if (item.type === "link") {
+          a.href=item.href;
+          a.target = "_blank";
+          a.text = item.title;
+        }
+        else if (item.type === "checkbox_item" || item.type === "checked") {
+          a.href="#";
+          a.dataset.value = item.value;
+          a.text = item.title;
+        }
+        else {
+          a.href="#";
+          a.text = item.title;
+        }
+        menu_item(li,item);
+      }
+    }
+  }
+
+
+  ////// MAIN //////
+
+  let main = document.querySelector('main');
+
+
+  fetch('data/menus.json', {
+      method: 'GET',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      mode: 'cors',
+      cache: 'default'
+    }
+  )
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })
+  .then ( menus => {
+    let nodeM = document.createElement('nav');
+    nodeM.href = "#";
+    nodeM.id = "top";
+    nodeM.className = 'menu';
+    nodeM.innerHTML = '<i class="fas fa-plus-circle"></i>';
+    nodeM.innerHTML = `<input id="menu__toggle" type="checkbox" class="menu__toggle">
+    <label for="menu__toggle" class="menu__toggle-label">
+      <svg preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
+        <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"></path>
+      </svg>
+      <svg preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
+        <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path>
+      </svg>
+    </label>`;
+    document.body.prepend(nodeM);
+
+    console.log(menus);
+    menu_item(nodeM,menus.navbar);
+
+
+    // Then create nodes...
+    return fetch('data/nodes.json', {
+        method: 'GET',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        mode: 'cors',
+        cache: 'default'
+      }
+    )
+  })
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })
+  .then ( nodeTemplates => {
+    console.log(nodeTemplates);
+    // Create Graph
+    TWIP.nodeTemplates = nodeTemplates;
+
+    // Create Edges
+    let svg = document.createElementNS(xmlns,'svg');
+    svg.setAttribute('width','100%');
+    svg.setAttribute('height','100%');
+
+    main.prepend(svg);
+    let boardgame = document.createElement('div');
+    boardgame.id = 'board';
+    boardgame.className = 'board';
+    main.appendChild(boardgame);
+
+    // Load Test Graph
+    let test = {
+      nodes: [
+        {
+          id: 0,
+          template:1,
+          pos: [0,0],
+          metadata: {
+            type: 3,
+            fill: "rgb(0,0,0)",
+            width: 256,
+            height: 256,
+            nslices: 1
+          }
+        },
+        {
+          id: 2,
+          template:3,
+          pos: [0,0],
+          metadata: {
+            sample: 5
+          }
+        },
+        {
+          id: 5,
+          template:11,
+          pos: [0,0],
+          metadata: {
+            backdrop: true
+          }
+        },
+        {
+          id: 14,
+          template:27,
+          pos: [0,0],
+          metadata: {
+            mode: 12
+          }
+        },
+        {
+          id: 17,
+          template:33,
+          pos: [0,0],
+          metadata: {
+            op: 10
+          }
+        },
+        {
+          id: 20,
+          template:42,
+          pos: [0,0],
+          metadata: {
+            op: 2
+          }
+        },
+        {
+          id: 21,
+          template:51,
+          pos: [0,0],
+          metadata: {
+          }
+        },
+        {
+          id: 22,
+          template:50,
+          pos: [0,0],
+          metadata: {
+          }
+        },
+        {
+          id: 23,
+          template:26,
+          pos: [0,0],
+          metadata: {
+            colorspace: 1
+          }
+        }
+      ],
+      edges : [
+        {
+          eid: 1,
+          source: 0,out: 0,
+          target: 17, in: 1,
+        },
+        {
+          eid: 2,
+          source: 2,out: 0,
+          target: 17, in: 0,
+        },
+        {
+          eid: 3,
+          source: 17,out: 0,
+          target: 14, in: 0,
+        },
+        {
+          eid: 4,
+          source: 20,out: 0,
+          target: 5, in: 0,
+        },
+        {
+          eid: 5,
+          source: 14,out: 0,
+          target: 20, in: 0,
+        },
+        {
+          eid: 6,
+          source: 2,out: 0,
+          target: 21, in: 0,
+        },
+        {
+          eid: 7,
+          source: 2,out: 0,
+          target: 22, in: 0,
+        }
+      ]
+    };
+
+    TWIP.graph.setTemplates(nodeTemplates);
+    TWIP.graph.setRootNode(boardgame);
+    TWIP.graph.setGraphicsContext(svg);
+    TWIP.graph.build(test);
+    TWIP.graph.show();
+
+    TWIP.init();
+  }); 
+
+</script>
+</body>
+</html>

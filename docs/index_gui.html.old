@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<title>TWIP GUI</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet"> 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link rel="stylesheet" href="./css/twip_menu.css">
+<link rel="stylesheet" href="./css/twip.css">
+
+</head>
+<body>
+<main>
+</main>
+
+<script type="text/javascript">
+  'use strict';
+
+  const menu_item = (parent,menu) => {
+
+    if (menu.children !== undefined) {
+      let ul = document.createElement('ol');
+      ul.className = menu.type;
+      parent.append(ul);
+      for ( let item of menu.children) {
+        console.log(item);
+        let li = document.createElement('li');
+        ul.append(li);
+        li.id = item.id;
+        li.className = 'menu-item';
+        let a = document.createElement('a');
+        li.append(a);
+        if (item.type === "link") {
+          a.href=item.href;
+          a.target = "_blank";
+          a.text = item.title;
+        }
+        else if (item.type === "checkbox_item" || item.type === "checked") {
+          a.href="#";
+          a.dataset.value = item.value;
+          a.text = item.title;
+        }
+        else {
+          a.href="#";
+          a.text = item.title;
+        }
+        menu_item(li,item);
+      }
+    }
+  }
+
+  const xmlns = "http://www.w3.org/2000/svg";
+
+  /**
+   * Click and Drag Feature 
+   *
+   * @author Jean-Christophe Taveau
+
+var mousePosition;
+var offset = [0,0];
+var div;
+var isDown = false;
+
+div = document.createElement("div");
+div.style.position = "absolute";
+div.style.left = "0px";
+div.style.top = "0px";
+div.style.width = "100px";
+div.style.height = "100px";
+div.style.background = "red";
+div.style.color = "blue";
+
+document.body.appendChild(div);
+
+div.addEventListener('mousedown', function(e) {
+    isDown = true;
+    offset = [
+        div.offsetLeft - e.clientX,
+        div.offsetTop - e.clientY
+    ];
+}, true);
+
+document.addEventListener('mouseup', function() {
+    isDown = false;
+}, true);
+
+document.addEventListener('mousemove', function(event) {
+    event.preventDefault();
+    if (isDown) {
+        mousePosition = {
+
+            x : event.clientX,
+            y : event.clientY
+
+        };
+        div.style.left = (mousePosition.x + offset[0]) + 'px';
+        div.style.top  = (mousePosition.y + offset[1]) + 'px';
+    }
+}, true);
+
+---------------------------------------------------
+var m = document.getElementById('move');
+m.addEventListener('mousedown', mouseDown, false);
+window.addEventListener('mouseup', mouseUp, false);
+
+function mouseUp() {
+    window.removeEventListener('mousemove', move, true);
+}
+
+function mouseDown(e) {
+    window.addEventListener('mousemove', move, true);
+}
+
+function move(e) {
+    m.style.top = e.clientY + 'px';
+    m.style.left = e.clientX + 'px';
+};
+
+   */
+  const draggable = (element) => {
+    
+    const dragstart = (event) => {
+      // centers the tile at (pageX, pageY) coordinates
+      const moveAt = (pageX, pageY) => {
+        // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
+        dragged.style.left = pageX - orgX  + dx + window.scrollX + 'px';
+        dragged.style.top = pageY - orgY + dy  + window.scrollY + 'px';
+      }
+
+      const drag_over = (event) => {
+        moveAt(event.pageX, event.pageY);
+        // Update Edges
+        updateEdges([dragged]);
+
+        event.preventDefault();
+        return false;
+      }
+      
+      const drag_end = (event) => {
+        let node = document.getElementById(event.target.dataset.nodeid);
+        node.style.zIndex = 1;
+        window.removeEventListener('mousemove', drag_over,false);
+        dragged.removeEventListener('mouseup', drag_end,false);
+        // Update Edges
+        updateEdges([node]);
+      }
+      
+      // Main of `dragstart`
+      console.log(event);
+      let dragged = document.getElementById(event.target.dataset.nodeid);
+      let orgX = event.pageX;
+      let orgY = event.pageY;
+      // TODO Must be improved - All the parents up to `game`
+      let dx = dragged.getBoundingClientRect().left;
+      let dy = dragged.getBoundingClientRect().top;
+      dragged.style.zIndex = 1000;
+
+      moveAt(event.pageX, event.pageY);
+
+      // Move the tile on mousemove
+      window.addEventListener('mousemove', drag_over);
+
+      // Drop the tile, remove unneeded handlers
+      window.addEventListener('mouseup', drag_end);
+      event.preventDefault();
+    };
+
+    // M A I N
+    let header = element.firstChild;
+    header.classList.add('movable');
+    header.addEventListener('mousedown', dragstart,false); 
+    header.addEventListener('dragstart', (e) => {e.preventDefault();return false},false); 
+    header.addEventListener('dragover', (e) => {return false},false); 
+    header.addEventListener('drop', (e) => false,false); 
+  }
+
+  /**
+   * Events
+   */
+  const shrinkExpand = (evt) => {
+    console.log(evt);
+    console.log(evt.target.value,evt.target.parentNode.id);
+    // Hide body, footer
+    let id = evt.target.parentNode.id.match(/\d+/)[0];
+    let node = document.getElementById(`node_${id}`);
+    node.classList.toggle('shrink');
+
+    // Shrink mode is true
+    updateEdges([id],true);
+    console.log(node);
+
+  }
+
+  const displayLayer = (evt) => {
+    console.log(evt.target.value,evt.target.id);
+    let id = evt.target.id.match(/\d+/)[0];
+    console.log(id);
+    // Pass #1
+    let layers = document.querySelectorAll(`#body_${id} .layer`);
+    layers.forEach( (layer) => layer.style.display = (layer.id === `layer_${evt.target.value}`) ?  "table-row-group" : "none");
+    // Pass #2
+    layers = document.querySelectorAll(`#body_${id} .outputs .layer`);
+    layers.forEach( (layer) => layer.style.display = (layer.id === `layer_${evt.target.value}`) ?  "block" : "none");
+    console.log(layers);
+  }
+
+  /**
+   * GUI
+   */
+  const createNode = (node,id) => {
+
+    const createNodeHTML = (props) => {
+      return props.reduce( (accu,prop,index) => {
+        let label = prop.label;
+
+        if (label === '_nodisplay_') {
+          return accu;
+        }
+        accu += (prop.output) ? `<div id="o_${index}" class="output">` : ((prop.input) ? `<div id="i_${index}" class="input">`:`<div class="row">`);
+        if (prop.input !== undefined || prop.output !== undefined) {
+          accu += `<button><i class="fas fa-chevron-circle-right"></i></button>`;
+        }
+
+        if (prop.label !== undefined && prop.output === undefined) {
+          accu += `<label>${prop.label}</label>`;
+        }
+
+        if (prop.select !== undefined) {
+          let options = prop.select.reduce( (html,item,index) => html + `<option value="${index}">${item}</option>`,'');
+          accu += `<select>${options}</select>`;
+        }
+        else if (prop.checkbox !== undefined) {
+           accu += `<input class="checkbox" type="checkbox" value="${prop.checkbox}" ${prop.checkbox ? 'checked': ''}></input>`;
+        }
+        else if (prop.file !== undefined) {
+           accu += `<i class=\"far fa-folder-open\"></i></label><input id="file" class="file-input" type="file"></input>`;
+        }
+        else if (prop.numerical !== undefined){
+          // Label
+           accu += `<input type="text" class="numerical" name="${prop.var || 'unknown'}" minlength="4" maxlength="8" size="10" value="${prop.numerical}"></input>`;
+        }
+        else if (prop.text !== undefined){
+          // Label
+           accu += `<input type="text" class="text" minlength="4" maxlength="8" size="10" value="${prop.text}"></input>`;
+        }
+        else if (prop.readonly !== undefined){
+          // Label
+           accu += `<input type="text" readonly minlength="4" maxlength="8" size="10" value="${prop.readonly}"></input>`;
+        }
+
+        if (prop.label !== undefined && prop.output !== undefined) {
+          accu += `<label>${prop.label}</label>`;
+        }
+        accu += '</div>';
+        return accu;
+      },
+        ''
+      );
+    }
+
+    // Main
+    console.log('CREATE ' + node.description);
+    let nodeH = document.createElement('section');
+    nodeH.id = 'node_'+id;
+    nodeH.style.left = `${Math.floor(Math.random() * 1000)}px`;
+    nodeH.style.top = `${Math.floor(Math.random() * 600)}px`;
+    let isLayerGUI = node.properties.some( (p) => p.layer !== undefined);
+    let hasOutputs = node.properties.some( (p) => (p.layer !== undefined && p.layer.type === 'output') || p.output !== undefined);
+    let hasInputs  = node.properties.some( (p) => (p.layer !== undefined && p.layer.type === 'input')  || p.input !== undefined);
+
+    // Header
+    let head = document.createElement('div'); head.className = 'header'; head.classList.add(node.class.replace('.','_').toLowerCase());
+    let preview = node.preview ? '<a href="#"><span class="preview"><i class="far fa-eye"></i></span></a>' : '';
+    let desc =  node.description;
+    head.innerHTML = `
+      <p title="${node.help ? node.help : "No Help"}" data-nodeid="${nodeH.id}">
+        <a href="#" id="expand_${id}" onclick="shrinkExpand(event)">
+          <span class="expandB">&#9662;</span>
+          <span class="shrinkB">&#9656;</span>
+        </a>
+        &nbsp;&nbsp;#${node.id} - ${desc} &nbsp;${preview}
+      </p>`;
+
+    // Shrink
+    let shrink = document.createElement('div');
+    shrink.className = 'shrinkdiv'; shrink.classList.add(node.class.replace('.','_').toLowerCase());
+    shrink.innerHTML = (hasInputs) ? '<span class="input_connector"><i class="fas fa-chevron-circle-right"></i></span>': '';
+    shrink.innerHTML += '<p>&nbsp;</p>';
+    shrink.innerHTML += (hasOutputs) ? '<span class="output_connector"><i class="fas fa-chevron-circle-right"></i></span>' : '';
+
+    // Body
+    let body = document.createElement('div');
+    body.id = 'body_'+id;
+    body.className = 'body';
+    // Main content
+    let outputs = document.createElement('div'); outputs.id = 'outputs_' + id; outputs.className = 'outputs';
+    let content = document.createElement('div'); content.id = 'content_' + id; content.className = 'content';
+    let inputs = document.createElement('div'); inputs.id   = 'inputs_' + id; inputs.className = 'inputs';
+    let action = document.createElement('div'); action.className = 'action';
+    let popup = document.createElement('div'); popup.className = 'popup';
+    body.appendChild(outputs);
+    body.appendChild(content);
+    body.appendChild(inputs);
+    body.appendChild(action);
+    body.appendChild(popup);
+    
+    // Parameters
+    let outputLayers = [];
+    let contentLayers = [];
+    let inputLayers = [];
+    let headLayer;
+
+    if (isLayerGUI) {
+      // Sort layers according to types: <output>, <content>, <input>
+      headLayer = node.properties.filter( p => p.layerselect !== undefined)[0];
+      let layers = node.properties.filter( p => p.layer !== undefined);
+      outputLayers = layers.filter( (lay) => lay.type === 'output');
+      contentLayers = layers.filter( (lay) => lay.type === 'content');
+      inputLayers = layers.filter( (lay) => lay.type === 'input');
+    }
+
+    // Outputs
+    if (outputLayers.length > 0) {
+      outputs.innerHTML = headLayer.select.reduce ( (html,desc,index) => {
+        console.log('CHOICE ', index,desc);
+        let one = outputLayers.filter( layer => layer.layer === desc)[0];
+        return html + `<div id="layer_${index}" class="layer"> ${createNodeHTML(one.properties)} </div>`;
+      },'');
+    }
+    else {
+      outputs.innerHTML = createNodeHTML( node.properties.filter( (prop) => prop.output !== undefined) );
+    }
+
+    // Content
+    if (isLayerGUI) {
+      // Selector
+      let options = headLayer.select.reduce( (html,item,index) => html + `<option value="${index}">${item}</option>`,'');
+      content.innerHTML = `<div class="row"><label>${headLayer.label}</label><select id='layerselect_${id}' onchange = "displayLayer(event)">${options}</select></div>`;
+    }
+
+    if (contentLayers.length > 0) {
+      content.innerHTML += headLayer.select.reduce ( (html,desc,index) => {
+        console.log('CHOICE '+desc);
+        let one = contentLayers.filter( lay => lay.layer === desc)[0];
+        console.log(one);
+        return html + `<div id="layer_${index}" class="layer"> ${createNodeHTML(one.properties)} </div>`;
+      },'');
+    }
+    else {
+      content.innerHTML += createNodeHTML( node.properties.filter( (prop) => prop.layer === undefined && prop.layerselect === undefined && prop.input === undefined && prop.output === undefined) );
+    }
+
+
+    // Inputs
+    if (inputLayers.length > 0) {
+      inputs.innerHTML = headLayer.select.reduce ( (html,desc,index) => {
+        let one = inputLayers.filter( layer => layer.layer === desc)[0];
+        return html + `<div id="layer_${index}" class="layer"> ${createNodeHTML(one.properties)} </div>`;
+      },'');
+    }
+    else {
+      inputs.innerHTML = createNodeHTML( node.properties.filter( (prop) => prop.input !== undefined) );
+    }
+    
+    // Footer
+    let foot = document.createElement('div');
+    foot.className = 'footer';
+    foot.innerHTML = `<span style="align:right;margin:2px">${node.class}</span>`; // <button class="resize"><i class="fas fa-signal"></i></button>
+    nodeH.appendChild(head);
+    nodeH.appendChild(shrink);
+    nodeH.appendChild(body);
+    nodeH.appendChild(foot);
+
+    // Add draggable feature
+    draggable(nodeH);
+    main.appendChild(nodeH);
+  }
+
+  /**
+   *
+   */
+  const getCoords = (node) => {
+    let rect = node.getBoundingClientRect();
+    // console.log(rect);
+    return {
+      x: rect.left + rect.width / 2.0 + window.scrollX,
+      y: rect.top  + rect.height / 2.0 + window.scrollY
+    }
+  }
+
+  const createEdges = (svg,edges) => {
+    // Get geometry (x,y,width,height) and Compute absolute position
+
+
+    const createEdge = (idE,idS,idT,input,output) => {
+      let nodeS = document.querySelector(`#node_${idS} #o_${output} button`);
+      if (nodeS.dataset.edge !== undefined) {
+        console.log(nodeS.dataset.edge);
+        let tmp = JSON.parse(nodeS.dataset.edge);
+        tmp.push( `e_${idE}`);
+        nodeS.dataset.edge = JSON.stringify(tmp);
+      }
+      else {
+        nodeS.dataset.edge = `["e_${idE}"]`;
+      }
+      let nodeT = document.querySelector(`#node_${idT} #i_${input} button`);
+      nodeT.dataset.edge = `e_${idE}`;
+
+      console.log(nodeS.id + '--> ' + nodeT.id);
+      let start = getCoords(nodeS);
+      let end = getCoords(nodeT);
+      let line = document.createElementNS(xmlns,'line');
+      line.dataset.source = `node_${idS}`;
+      line.dataset.target = `node_${idT}`;
+      line.setAttribute('id',`e_${idE}`);
+      line.setAttribute('stroke-width',2.0);
+      line.setAttribute('x1',start.x);
+      line.setAttribute('y1',start.y);
+      line.setAttribute('x2',end.x);
+      line.setAttribute('y2',end.y);
+      line.setAttribute("stroke", "#dfdfdf")
+      svg.append(line);
+    }
+
+    // MAIN //
+    edges.forEach( (edge) => createEdge(edge.eid,edge.source,edge.target,edge.in,edge.out));
+  }
+
+  const updateEdges = (nodes,shrinkMode = false) => {
+    nodes.forEach( node => {
+      // Get Edge ID
+      // let src_eid = document.querySelector(`#${node.id} .input button`);
+      let source = (shrinkMode) ? document.querySelector(`#${node.id} .output_connector`) : document.querySelector(`#${node.id} .output button`);
+      if (source !== null && source.dataset.edge !== undefined) {
+        console.log(source);
+        console.log(source.dataset.edge);
+        JSON.parse(source.dataset.edge).forEach( (e) => {
+          let line = document.getElementById(e);
+          let start = getCoords(source);
+          line.setAttribute('x1',start.x);
+          line.setAttribute('y1',start.y);
+        });
+      }
+      let target = (shrinkMode) ? document.querySelector(`#${node.id} .input_connector`) : document.querySelectorAll(`#${node.id} .input button`);
+      if (target !== null) {
+        target.forEach( t => {
+          let line = document.getElementById(t.dataset.edge);
+          let end = getCoords(t);
+          line.setAttribute('x2',end.x);
+          line.setAttribute('y2',end.y);
+        });
+      }
+
+
+    });
+  }
+  ////// MAIN //////
+
+  let main = document.querySelector('main');
+
+
+
+  fetch('./data/menus.json', {
+      method: 'GET',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      mode: 'cors',
+      cache: 'default'
+    }
+  )
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })
+  .then ( menus => {
+    let nodeM = document.createElement('nav');
+    nodeM.href = "#";
+    nodeM.id = "top";
+    nodeM.className = 'menu';
+    nodeM.innerHTML = '<i class="fas fa-plus-circle"></i>';
+    nodeM.innerHTML = `<input id="menu__toggle" type="checkbox" class="menu__toggle">
+    <label for="menu__toggle" class="menu__toggle-label">
+      <svg preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
+        <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"></path>
+      </svg>
+      <svg preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
+        <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path>
+      </svg>
+    </label>`;
+    document.body.prepend(nodeM);
+
+    console.log(menus);
+    menu_item(nodeM,menus.navbar);
+
+
+    // Then create nodes...
+    return fetch('./data/nodes.json', {
+        method: 'GET',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        mode: 'cors',
+        cache: 'default'
+      }
+    )
+  })
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })
+  .then ( nodePackage => {
+    console.log(nodePackage);
+    // Create Graph
+    for (let n =0; n < nodePackage.length; n++) {
+      createNode(nodePackage[n],n);
+    }
+    // Create Edges
+    let svg = document.createElementNS(xmlns,'svg');
+    svg.setAttribute('width','100%');
+    svg.setAttribute('height','100%');
+
+    main.prepend(svg);
+
+  }); 
+
+</script>
+</body>
+</html>

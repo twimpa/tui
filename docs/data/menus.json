@@ -1,0 +1,1236 @@
+{
+  "navbar": {
+    "id":"navbar",
+    "type": "menu__content",
+    "children": [
+      {
+        "title": "Inputs",
+        "type" : "sub-menu",
+        "children": [
+            {
+              "title": "Image...",
+              "shortcut":["ctrl","n"],
+              "code": "ij.plugin.Commands('new')",
+              "ui": "new_image"
+            },
+            {
+              "title": "Hyperstack...",
+              "code":"ij.plugin.HyperStackConverter('new')"
+            },
+            {
+              "title":"Text",
+              "shortcut":["ctrl","shift","n"],
+              "code" :"ij.plugin.NewPlugin('text')"
+            },
+            {
+              "title":"New",
+              "code" :"ij.plugin.Clipboard('show')"
+            },
+            {
+              "title":"Samples",
+              "code" :"ij.plugin.Clipboard('show')"
+            },
+            {
+              "title":"Image Sequence...",
+              "code" : "ij.plugin.FolderOpener()"
+            },
+            {
+              "title":"Raw...",
+              "code" : "ij.plugin.Raw()"
+            },
+            {
+              "title":"LUT... ",
+              "code" : "ij.plugin.LutLoader()"
+            },
+            {
+              "title":"URL...",
+              "code" : "ij.plugin.URLOpener()"
+            },
+            {
+              "title":"AVI...",
+              "code" : "ij.plugin.AVI_Reader()"
+            },
+            {
+              "title":"XY Coordinates... ",
+              "code" : "ij.plugin.XY_Reader()"
+            },
+            {
+              "title":"Capture Video...",
+              "code" : "QT_Capture()"
+            }
+        ]
+      },
+      {
+        "title": "Outputs",
+        "type" : "sub-menu",
+        "children": [
+          {
+            "title": "Save",
+            "code": "ij.plugin.Commands(\"save\")",
+            "shortcut": "KeyEvent.VK_S"
+          }
+        ]
+      },
+      {
+        "title":"Edit",
+        "type" : "sub-menu",
+        "children": [
+          {
+            "title": "Undo",
+            "code": "ij.plugin.Commands(\"undo\")",
+            "shortcut": "KeyEvent.VK_Z"
+          },
+          {
+            "title": "",
+            "type": "separator",
+            "code": "undefined",
+            "comment": "this is a separator"
+          },
+          {
+            "title": "Cut",
+            "code": "ij.plugin.Clipboard(\"cut\")",
+            "shortcut": "KeyEvent.VK_X"
+          },
+          {
+            "title": "Copy",
+            "code": "ij.plugin.Clipboard(\"copy\")",
+            "shortcut": "KeyEvent.VK_C"
+          },
+          {
+            "title": "Copy to System",
+            "code": "ij.plugin.Clipboard(\"scopy\")",
+            "shortcut": 0
+          },
+          {
+            "title": "Paste",
+            "code": "ij.plugin.Clipboard(\"paste\")",
+            "shortcut": "KeyEvent.VK_V"
+          },
+          {
+            "title": "Paste Control...",
+            "code": "ij.plugin.frame.PasteController",
+            "shortcut": 0
+          },
+          {
+            "title": "",
+            "type": "separator",
+            "code": "undefined",
+            "comment": "this is a separator"
+          },
+          {
+            "title": "Clear",
+            "code": "ij.plugin.filter.Filler(\"clear\")",
+            "shortcut": 0
+          },
+          {
+            "title": "Clear Outside",
+            "code": "ij.plugin.filter.Filler(\"outside\")",
+            "shortcut": 0
+          },
+          {
+            "title": "Fill",
+            "code": "ij.plugin.filter.Filler(\"fill\")",
+            "shortcut": "KeyEvent.VK_F"
+          },
+          {
+            "title": "Draw",
+            "code": "ij.plugin.filter.Filler(\"draw\")",
+            "shortcut": "KeyEvent.VK_D"
+          },
+          {
+            "title": "Invert",
+            "code": "ij.plugin.filter.Filters(\"invert\")",
+            "shortcut":  "KeyEvent.VK_I"
+          },
+          {
+            "title": "",
+            "type": "separator",
+            "code": "undefined",
+            "comment": "this is a separator"
+          },
+          {
+            "title": "Selection",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Select All[a]",
+                "code": "ij.plugin.Selection('all')"
+              },
+              {
+                "title": "Select None[A]",
+                "code": "ij.plugin.Selection('none')"
+              },
+              {
+                "title": "Restore Selection[E]",
+                "code": "ij.plugin.Selection('restore')"
+              },
+              {
+                "title": "Fit Spline",
+                "code": "ij.plugin.Selection('spline')"
+              },
+              {
+                "title": "Fit Circle",
+                "code": "ij.plugin.Selection('circle')"
+              },
+              {
+                "title": "Fit Ellipse",
+                "code": "ij.plugin.Selection('ellipse')"
+              },
+              {
+                "title": "Interpolate",
+                "code": "ij.plugin.Selection('interpolate')"
+              },
+              {
+                "title": "Convex Hull",
+                "code": "ij.plugin.Selection('hull')"
+              },
+              {
+                "title": "Make Inverse",
+                "code": "ij.plugin.Selection('inverse')"
+              },
+              {
+                "title": "Create Selection",
+                "code": "ij.plugin.Selection('from')"
+              },
+              {
+                "title": "Create Mask",
+                "code": "ij.plugin.Selection('mask')"
+              },
+              {
+                "title": "Properties... [y]",
+                "code": "ij.plugin.Selection('properties')"
+              },
+              {
+                "title": "Rotate...",
+                "code": "ij.plugin.Selection('rotate')"
+              },
+              {
+                "title": "Enlarge...",
+                "code": "ij.plugin.Selection('enlarge')"
+              },
+              {
+                "title": "Make Band...",
+                "code": "ij.plugin.Selection('band')"
+              },
+              {
+                "title": "Specify...",
+                "code": "ij.plugin.SpecifyROI()"
+              },
+              {
+                "title": "Straighten...",
+                "code": "ij.plugin.Straightener()"
+              },
+              {
+                "title": "To Bounding Box",
+                "code": "ij.plugin.Selection('tobox')"
+              },
+              {
+                "title": "Line to Area",
+                "code": "ij.plugin.Selection('toarea')"
+              },
+              {
+                "title": "Area to Line",
+                "code": "ij.plugin.Selection('toline')"
+              },
+              {
+                "title": "Image to Selection...",
+                "code": "ij.plugin.OverlayCommands('image-roi')"
+              },
+              {
+                "title": "Add to Manager[t]",
+                "code": "ij.plugin.Selection('add')"
+              }
+            ]
+          },
+          {
+            "title": "Options",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Line Width...",
+                "code": "ij.plugin.Options('line')"
+              },
+              {
+                "title": "Input/Output...",
+                "code": "ij.plugin.Options('io')"
+              },
+              {
+                "title": "Fonts...",
+                "code": "ij.plugin.frame.Fonts()"
+              },
+              {
+                "title": "Profile Plot Options...",
+                "code": "ij.plugin.filter.Profiler('set')"
+              },
+              {
+                "title": "Rounded Rect Tool...",
+                "code": "ij.plugin.RectToolOptions()"
+              },
+              {
+                "title": "Arrow Tool...",
+                "code": "ij.plugin.ArrowToolOptions()"
+              },
+              {
+                "title": "Point Tool...",
+                "code": "ij.plugin.Colors('point')"
+              },
+              {
+                "title": "Wand Tool...",
+                "code": "ij.plugin.WandToolOptions()"
+              },
+              {
+                "title": "Colors...",
+                "code": "ij.plugin.Colors()"
+              },
+              {
+                "title": "Appearance...",
+                "code": "ij.plugin.AppearanceOptions()"
+              },
+              {
+                "title": "Conversions...",
+                "code": "ij.plugin.Options('conv')"
+              },
+              {
+                "title": "Memory & Threads...",
+                "code": "ij.plugin.Memory()"
+              },
+              {
+                "title": "Proxy Settings...",
+                "code": "ij.plugin.ProxySettings()"
+              },
+              {
+                "title": "Compiler...",
+                "code": "ij.plugin.Compiler('options')"
+              },
+              {
+                "title": "DICOM...",
+                "code": "ij.plugin.Options('dicom')"
+              },
+              {
+                "title": "Misc...",
+                "code": "ij.plugin.Options('misc')"
+              },
+              {
+                "title": "Reset... ",
+                "code": "ij.plugin.Options('reset')"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title":"Image",
+        "type" : "sub-menu",
+        "children": [
+          {
+            "title":"Type",
+            "type": "sub-menu-item"
+          },
+          {
+            "title": "Adjust",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Brightness/Contrast...",
+                "shortcut" : ["ctrl", "shift", "c"],
+                "code": "ij.plugin.frame.ContrastAdjuster()",
+                "ui" : "b_and_c"
+              },
+              {
+                "title": "Window/Level...",
+                "code": "ij.plugin.frame.ContrastAdjuster('wl')"
+              },
+              {
+                "title": "Color Balance...",
+                "code": "ij.plugin.frame.ContrastAdjuster('balance')"
+              },
+              {
+                "title": "Threshold...[T]",
+                "code": "ij.plugin.frame.ThresholdAdjuster()"
+              },
+              {
+                "title": "Color Threshold...",
+                "code": "ij.plugin.frame.ColorThresholder()"
+              },
+              {
+                "title": "Size...",
+                "code": "ij.plugin.Resizer()"
+              },
+              {
+                "title": "Canvas Size...",
+                "code": "ij.plugin.CanvasResizer()"
+              },
+              {
+                "title": "Line Width... ",
+                "code": "ij.plugin.frame.LineWidthAdjuster()"
+              }
+            ]
+          },
+          {
+            "title": "Show Info...",
+            "code": "ij.plugin.ImageInfo",
+            "shortcut":  "KeyEvent.VK_I",
+            "children": [
+
+            ]
+          },
+          {
+            "title": "Properties...",
+            "code": "ij.plugin.filter.ImageProperties",
+            "shortcut":  "KeyEvent.VK_P",
+            "children": [
+
+            ]
+          },
+          {
+            "title": "Color",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Split Channels",
+                "code": "ij.plugin.ChannelSplitter()"
+              },
+              {
+                "title": "Merge Channels...",
+                "code": "ij.plugin.RGBStackMerge()"
+              },
+              {
+                "title": "Arrange Channels...",
+                "code": "ij.plugin.ChannelArranger()"
+              },
+              {
+                "title": "Stack to RGB",
+                "code": "ij.plugin.RGBStackConverter()"
+              },
+              {
+                "title": "Make Composite",
+                "code": "ij.plugin.CompositeConverter()"
+              },
+              {
+                "title": "Show LUT",
+                "code": "ij.plugin.filter.LutViewer()"
+              },
+              {
+                "title": "Edit LUT...",
+                "code": "ij.plugin.LUT_Editor()"
+              },
+              {
+                "title": "Color Picker...[K]",
+                "code": "ij.plugin.frame.ColorPicker()"
+              }
+            ]
+          },
+          {
+            "title": "Stacks",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Add Slice",
+                "code": "ij.plugin.StackEditor(\"add\")"
+              },
+              {
+                "title": "Delete Slice",
+                "code": "ij.plugin.StackEditor(\"delete\")"
+              },
+              {
+                "title": "Next Slice [>]",
+                "code": "ij.plugin.Animator(\"next\")"
+              },
+              {
+                "title": "Previous Slice [<]",
+                "code": "ij.plugin.Animator(\"previous\")"
+              },
+              {
+                "title": "Set Slice...",
+                "code": "ij.plugin.Animator(\"set\")"
+              },
+              {
+                "title": "",
+                "type":"separator"
+              },
+              {
+                "title": "Images to Stack",
+                "code": "ij.plugin.ImagesToStack()"
+              },
+              {
+                "title": "Stack to Images",
+                "code": "ij.plugin.StackEditor(\"toimages\")"
+              },
+              {
+                "title": "Make Montage...",
+                "code": "ij.plugin.MontageMaker()"
+              },
+              {
+                "title": "Reslice [/]...",
+                "code": "ij.plugin.Slicer()"
+              },
+              {
+                "title": "Orthogonal Views[H]",
+                "code": "ij.plugin.Orthogonal_Views()"
+              },
+              {
+                "title": "Z Project...",
+                "code": "ij.plugin.ZProjector()"
+              },
+              {
+                "title": "3D Project...",
+                "code": "ij.plugin.Projector()"
+              },
+              {
+                "title": "Plot Z-axis Profile",
+                "code": "ij.plugin.filter.ZAxisProfiler()"
+              },
+              {
+                "title": "Label...",
+                "code": "ij.plugin.filter.StackLabeler()"
+              },
+              {
+                "title": "Statistics",
+                "code": "ij.plugin.Stack_Statistics()"
+              },
+              {
+                "title": "Animation_",
+                "type": "sub-menu",
+                "children": [
+                  {
+                    "title": "Start Animation [\\]",
+                    "code": "ij.plugin.Animator('start')"
+                  },
+                  {
+                    "title": "Stop Animation",
+                    "code": "ij.plugin.Animator('stop')"
+                  },
+                  {
+                    "title": "Animation Options...",
+                    "code": "ij.plugin.Animator('options')"
+                  }
+                ]
+              },
+              {
+                "title": "Tools_",
+                "type": "sub-menu",
+                "children": [
+                  {
+                    "title": "Combine...",
+                    "code": "ij.plugin.StackCombiner()"
+                  },
+                  {
+                    "title": "Concatenate...",
+                    "code": "ij.plugin.Concatenator()"
+                  },
+                  {
+                    "title": "Reduce...",
+                    "code": "ij.plugin.StackReducer()"
+                  },
+                  {
+                    "title": "Reverse",
+                    "code": "ij.plugin.StackReverser()"
+                  },
+                  {
+                    "title": "Insert...",
+                    "code": "ij.plugin.StackInserter()"
+                  },
+                  {
+                    "title": "Montage to Stack...",
+                    "code": "ij.plugin.StackMaker()"
+                  },
+                  {
+                    "title": "Make Substack...",
+                    "code": "ij.plugin.SubstackMaker()"
+                  },
+                  {
+                    "title": "Grouped Z Project...",
+                    "code": "ij.plugin.GroupedZProjector()"
+                  },
+                  {
+                    "title": "Remove Slice Labels",
+                    "code": "ij.plugin.SimpleCommands('remove')"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Hyperstacks",
+            "type": "sub-menu",
+            "children": [
+            ]
+          },
+          {
+            "title": "",
+            "type": "separator",
+            "code": "undefined",
+            "comment": "this is a separator"
+          },
+          {
+            "title": "Crop",
+            "code": "ij.plugin.Resizer(\"crop\")",
+            "shortcut":  "KeyEvent.VK_X"
+          },
+          {
+            "title": "Duplicate...",
+            "code": "ij.plugin.Duplicator",
+            "shortcut":  "KeyEvent.VK_D"
+          },
+          {
+            "title": "Rename...",
+            "code": "ij.plugin.SimpleCommands(\"rename\")",
+            "shortcut":  0
+          },
+          {
+            "title": "Scale...",
+            "code": "ij.plugin.Scaler()",
+            "shortcut":  "KeyEvent.VK_E"
+          },
+          {
+            "title": "Transform",
+            "type": "sub-menu",
+            "children":[
+
+            ]
+          },
+          {
+            "title": "Zoom",
+            "type": "sub-menu",
+            "children":[
+
+            ]
+          },
+          {
+            "title": "Overlay",
+            "type": "sub-menu",
+            "children":[
+
+            ]
+          },
+          {
+            "title": "",
+            "type": "separator",
+            "comment": "this is a separator"
+          },
+          {
+            "title": "Lookup Tables",
+            "type": "sub-menu",
+            "children":[
+              {
+                "title": "Invert LUT",
+                "code": "ij.plugin.LutLoader(\"invert\")"
+              },
+              {
+                "title": "Apply LUT",
+                "code": "ij.plugin.filter.LutApplier()"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title":"Process",
+        "type" : "sub-menu",
+        "children": [
+          {
+            "title": "Smooth",
+            "code": "ij.plugin.filter.Filters(\"smooth\")",
+            "shortcut": "KeyEvent.VK_S"
+          },
+          {
+            "title": "Sharpen",
+            "code": "ij.plugin.filter.Filters(\"sharpen\")",
+            "shortcut": 0
+          },
+          {
+            "title": "Find Edges",
+            "code": "ij.plugin.filter.Filters(\"edge\")",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Laplace"
+              },
+              {
+                "title": "Sobel"
+              },
+              {
+                "title": "Canny"
+              }
+            ]
+          },
+          {
+            "title": "Find Maxima...",
+            "code": "ij.plugin.filter.MaximumFinder",
+            "shortcut": 0
+          },
+          {
+            "title": "Enhance Contrast...",
+            "code": "ij.plugin.ContrastEnhancer",
+            "shortcut": 0
+          },
+          {
+            "title": "Noise",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Add Noise",
+                "code": "ij.plugin.filter.Filters(\"add\")"
+              },
+              {
+                "title": "Add Specified Noise...",
+                "code": "ij.plugin.filter.Filters(\"noise\")"
+              },
+              {
+                "title": "Salt and Pepper",
+                "code": "ij.plugin.filter.SaltAndPepper()"
+              },
+              {
+                "title": "",
+                "type": "separator"
+              },
+              {
+                "title": "Despeckle",
+                "code": "ij.plugin.filter.RankFilters(\"despeckle\")"
+              },
+              {
+                "title": "Remove Outliers...",
+                "code": "ij.plugin.filter.RankFilters(\"outliers\")"
+              },
+              {
+                "title": "Remove NaNs...",
+                "code": "ij.plugin.filter.RankFilters(\"nan\")"
+              }
+            ]
+          },
+          {
+            "title": "Shadows",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "North",
+                "code": "ij.plugin.filter.Shadows(\"north\")"
+              },
+              {
+                "title": "Northeast",
+                "code": "ij.plugin.filter.Shadows(\"northeast\")"
+              },
+              {
+                "title": "East",
+                "code": "ij.plugin.filter.Shadows(\"east\")"
+              },
+              {
+                "title": "Southeast",
+                "code": "ij.plugin.filter.Shadows(\"southeast\")"
+              },
+              {
+                "title": "South",
+                "code": "ij.plugin.filter.Shadows(\"south\")"
+              },
+              {
+                "title": "Southwest",
+                "code": "ij.plugin.filter.Shadows(\"southwest\")"
+              },
+              {
+                "title": "West",
+                "code": "ij.plugin.filter.Shadows(\"west\")"
+              },
+              {
+                "title": "Northwest",
+                "code": "ij.plugin.filter.Shadows(\"northwest\")"
+              },
+              {
+                "title": "",
+                "type":"separator"
+              },
+              {
+                "title": "Shadows Demo",
+                "code": "ij.plugin.filter.Shadows(\"demo\")"
+              }
+            ]
+          },
+          {
+            "title": "Binary",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Make Binary",
+                "code": "ij.plugin.Thresholder()"
+              },
+              {
+                "title": "Convert to Mask",
+                "code": "ij.plugin.Thresholder(\"mask\")"
+              },
+              {
+                "title": "",
+                "type": "separator"
+              },
+              {
+                "title": "Erode",
+                "code": "ij.plugin.filter.Binary(\"erode\")"
+              },
+              {
+                "title": "Dilate",
+                "code": "ij.plugin.filter.Binary(\"dilate\")"
+              },
+              {
+                "title": "Open",
+                "code": "ij.plugin.filter.Binary(\"open\")"
+              },
+              {
+                "title": "Close-",
+                "code": "ij.plugin.filter.Binary(\"close\")",
+                "comment": "Can't use 'Close' because it conflicts with File/Close"
+              },
+              {
+                "title": "",
+                "type": "separator"
+              },
+              {
+                "title": "Outline",
+                "code": "ij.plugin.filter.Binary(\"outline\")"
+              },
+              {
+                "title": "Fill Holes",
+                "code": "ij.plugin.filter.Binary(\"fill\")"
+              },
+              {
+                "title": "Skeletonize",
+                "code": "ij.plugin.filter.Binary(\"skel\")"
+              },
+              {
+                "title": "",
+                "type": "separator"
+              },
+              {
+                "title": "Distance Map",
+                "code": "ij.plugin.filter.EDM(\"edm\")"
+              },
+              {
+                "title": "Ultimate Points",
+                "code": "ij.plugin.filter.EDM(\"points\")"
+              },
+              {
+                "title": "Watershed",
+                "code": "ij.plugin.filter.EDM(\"watershed\")"
+              },
+              {
+                "title": "Voronoi",
+                "code": "ij.plugin.filter.EDM(\"voronoi\")"
+              },
+              {
+                "title": "",
+                "type": "separator"
+              },
+              {
+                "title": "Options...",
+                "code": "ij.plugin.filter.Binary(\"options\")"
+              }
+            ]
+          },
+          {
+            "title": "Math",
+            "type": "sub-menu",
+            "children": [
+              {
+                "title": "Arithmetic",
+                "type": "sub-menu",
+                "children": [
+                  {
+                    "title": "Add...",
+                    "code": "ij.plugin.filter.ImageMath(\"add\")"
+                  },
+                  {
+                    "title": "Subtract...",
+                    "code": "ij.plugin.filter.ImageMath(\"sub\")"
+                  },
+                  {
+                    "title": "Multiply...",
+                    "code": "ij.plugin.filter.ImageMath(\"mul\")"
+                  },
+                  {
+                    "title": "Divide...",
+                    "code": "ij.plugin.filter.ImageMath(\"div\")"
+                  },
+                  {
+                    "title": "Log",
+                    "code": "ij.plugin.filter.ImageMath(\"log\")"
+                  },
+                  {
+                    "title": "Exp",
+                    "code": "ij.plugin.filter.ImageMath(\"exp\")"
+                  },
+                  {
+                    "title": "Square",
+                    "code": "ij.plugin.filter.ImageMath(\"sqr\")"
+                  },
+                  {
+                    "title": "Square Root",
+                    "code": "ij.plugin.filter.ImageMath(\"sqrt\")"
+                  },
+                  {
+                    "title": "Abs",
+                    "code": "ij.plugin.filter.ImageMath(\"abs\")"
+                    }                ]
+                  },
+                  {
+                    "title": "Logical",
+                    "type": "sub-menu",
+                    "children": [
+                      {
+                        "title": "AND...",
+                        "code": "ij.plugin.filter.ImageMath(\"and\")"
+                      },
+                      {
+                        "title": "OR...",
+                        "code": "ij.plugin.filter.ImageMath(\"or\")"
+                      },
+                      {
+                        "title": "XOR...",
+                        "code": "ij.plugin.filter.ImageMath(\"xor\")"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Min...",
+                    "code": "ij.plugin.filter.ImageMath(\"min\")"
+                  },
+                  {
+                    "title": "Max...",
+                    "code": "ij.plugin.filter.ImageMath(\"max\")"
+                  },
+                  {
+                    "title": "Gamma...",
+                    "code": "ij.plugin.filter.ImageMath(\"gamma\")"
+                  },
+                  {
+                    "title": "Set...",
+                    "code": "ij.plugin.filter.ImageMath(\"set\")"
+                  },
+                  {
+                    "title": "Reciprocal",
+                    "code": "ij.plugin.filter.ImageMath(\"reciprocal\")"
+                  },
+                  {
+                    "title": "NaN Background",
+                    "code": "ij.plugin.filter.ImageMath(\"nan\")"
+                  },
+                  {
+                    "title": "Macro...",
+                    "code": "ij.plugin.filter.ImageMath(\"macro\")"
+                  }
+                ]
+              },
+              {
+                "title": "FFT",
+                "type": "sub-menu",
+                "children": [
+                  {
+                    "title": "FFT",
+                    "code": "ij.plugin.FFT(\"fft\")"
+                  },
+                  {
+                    "title": "Inverse FFT",
+                    "code": "ij.plugin.FFT(\"inverse\")"
+                  },
+                  {
+                    "title": "Redisplay Power Spectrum",
+                    "code": "ij.plugin.FFT(\"redisplay\")"
+                  },
+                  {
+                    "title": "FFT Options...",
+                    "code": "ij.plugin.FFT(\"options\")"
+                  },
+                  {
+                    "title": "",
+                    "type": "separator"
+                  },
+                  {
+                    "title": "Bandpass Filter...",
+                    "code": "ij.plugin.filter.FFTFilter()"
+                  },
+                  {
+                    "title": "Custom Filter...",
+                    "code": "ij.plugin.filter.FFTCustomFilter()"
+                  },
+                  {
+                    "title": "FD Math...",
+                    "code": "ij.plugin.FFTMath()"
+                  },
+                  {
+                    "title": "Swap Quadrants",
+                    "code": "ij.plugin.FFT(\"swap\")"
+                  }
+                ]
+              },
+              {
+                "title": "Filters",
+                "type": "sub-menu",
+                "children": [
+                  {
+                    "title": "Convolve...",
+                    "code": "ij.plugin.filter.Convolver()"
+                  },
+                  {
+                    "title": "Gaussian Blur...",
+                    "code": "ij.plugin.filter.GaussianBlur()"
+                  },
+                  {
+                    "title": "Median...",
+                    "code": "ij.plugin.filter.RankFilters(\"median\")"
+                  },
+                  {
+                    "title": "Mean...",
+                    "code": "ij.plugin.filter.RankFilters(\"mean\")"
+                  },
+                  {
+                    "title": "Minimum...",
+                    "code": "ij.plugin.filter.RankFilters(\"min\")"
+                  },
+                  {
+                    "title": "Maximum...",
+                    "code": "ij.plugin.filter.RankFilters(\"max\")"
+                  },
+                  {
+                    "title": "Unsharp Mask...",
+                    "code": "ij.plugin.filter.UnsharpMask()"
+                  },
+                  {
+                    "title": "Variance...",
+                    "code": "ij.plugin.filter.RankFilters(\"variance\")"
+                  },
+                  {
+                    "title": "",
+                    "type": "separator"
+                  },
+                  {
+                    "title": "Gaussian Blur 3D...",
+                    "code": "ij.plugin.GaussianBlur3D()"
+                  },
+                  {
+                    "title": "Median 3D...",
+                    "code": "ij.plugin.Filters3D(\"median\")"
+                  },
+                  {
+                    "title": "Mean 3D...",
+                    "code": "ij.plugin.Filters3D(\"mean\")"
+                  },
+                  {
+                    "title": "Minimum 3D...",
+                    "code": "ij.plugin.Filters3D(\"min\")"
+                  },
+                  {
+                    "title": "Maximum 3D...",
+                    "code": "ij.plugin.Filters3D(\"max\")"
+                  },
+                  {
+                    "title": "Variance 3D...",
+                    "code": "ij.plugin.Filters3D(\"var\")"
+                  },
+                  {
+                    "title": "",
+                    "type": "separator"
+                  },
+                  {
+                    "title": "Show Circular Masks...",
+                    "code": "ij.plugin.filter.RankFilters(\"masks\")"
+                  }
+                ]
+              },
+              {
+                "title": "",
+                "type": "separator",
+                "code": "undefined",
+                "comment": "this is a separator"
+              },
+              {
+                "title": "Batch"
+              },
+              {
+                "title": "Image Calculator...",
+                "code": "ij.plugin.ImageCalculator",
+                "shortcut": 0
+              },
+              {
+                "title": "Subtract Background...",
+                "code": "ij.plugin.filter.BackgroundSubtracter",
+                "shortcut": 0
+              },
+              {
+                "title": "Repeat Command",
+                "shortcut": "KeyEvent.VK_R"
+              }
+            ]
+          },
+          {
+            "title":"Analyze",
+            "type" : "sub-menu",
+            "children": [
+              {
+                "title": "Measure",
+                "code": "ij.plugin.filter.Analyzer",
+                "shortcut": "KeyEvent.VK_M"
+              },
+              {
+                "title": "Analyze Particles...",
+                "code": "ij.plugin.filter.ParticleAnalyzer",
+                "shortcut": 0
+              },
+              {
+                "title": "Summarize",
+                "code": "ij.plugin.filter.Analyzer(\"sum\")",
+                "shortcut": 0
+              },
+              {
+                "title": "Distribution...",
+                "code": "ij.plugin.Distribution",
+                "shortcut": 0
+              },
+              {
+                "title": "Label",
+                "code": "ij.plugin.filter.Filler(\"label\")",
+                "shortcut": 0
+              },
+              {
+                "title": "Clear Results",
+                "code": "ij.plugin.filter.Analyzer(\"clear\")",
+                "shortcut": 0
+              },
+              {
+                "title": "Set Measurements...",
+                "code": "ij.plugin.filter.Analyzer(\"set\")",
+                "shortcut": 0
+              },
+              {
+                "title": "",
+                "type": "separator",
+                "code": "undefined",
+                "comment": "this is a separator"
+              },
+              {
+                "title": "Set Scale...",
+                "code": "ij.plugin.filter.ScaleDialog()",
+                "shortcut": 0
+              },
+              {
+                "title": "Calibrate...",
+                "code": "ij.plugin.filter.Calibrator()",
+                "shortcut": 0
+              },
+              {
+                "title": "Histogram",
+                "code": "ij.plugin.Histogram()",
+                "shortcut": "KeyEvent.VK_H"
+              },
+              {
+                "title": "Plot Profile",
+                "code": "ij.plugin.Profiler(\"plot\")",
+                "shortcut": "KeyEvent.VK_K"
+              },
+              {
+                "title": "Surface Plot...",
+                "code": "ij.plugin.SurfacePlotter()",
+                "shortcut": 0
+              },
+              {
+                "title": "Gels",
+                "type": "sub-menu",
+                "children": [
+
+                ]
+              },
+              {
+                "title": "Tools",
+                "type": "sub-menu",
+                "children": [
+
+                ]
+              }
+            ]
+          },
+
+          {
+            "title":"Help",
+        "type" : "sub-menu",
+            "children": [
+              {
+                "title": "JIM Website...",
+                "type": "link",
+                "href": "https://crazybiocomputing.github.io/tijapi/index.html"
+              },
+              {
+                "title": "JIM News...",
+                "type": "link",
+                "href": "https://crazybiocomputing.github.io/tijapi/index.html"
+              },
+              {
+                "title": "Documentation...",
+                "type": "link",
+                "href": "https://github.com/crazybiocomputing/tijapi/wiki"
+              },
+              {
+                "title": "Installation...",
+                "code": "ij.plugin.SimpleCommands(\"install\")",
+                "shortcut": 0
+              },
+              {
+                "title": "Mailing List...",
+                "code": "ij.plugin.BrowserLauncher(\"https://list.nih.gov/archives/imagej.html\")",
+                "shortcut": 0
+              },
+              {
+                "title": "",
+                "type": "separator",
+                "code": "undefined",
+                "comment": "this is a separator"
+              },
+              {
+                "title": "Dev. Resources...",
+                "type": "link",
+                "href": "https://crazybiocomputing.github.io/tijapi/doc/index.html"
+              },
+              {
+                "title": "Plugins...",
+                "code": "ij.plugin.BrowserLauncher(\"{{IJ.URL}}/plugins\")",
+                "shortcut": 0
+              },
+              {
+                "title": "JS Scripts...",
+                "code": "ij.plugin.BrowserLauncher(\"{{IJ.URL}}/macros/\")",
+                "shortcut": 0
+              },
+              {
+                "title": "Macro Functions...",
+                "code": "ij.plugin.BrowserLauncher(\"{{IJ.URL}}/developer/macro/functions.html\")",
+                "shortcut": 0
+              },
+              {
+                "title": "",
+                "type": "separator",
+                "code": "undefined",
+                "comment": "this is a separator"
+              },
+              {
+                "title": "Update JIM...",
+                "code": "ij.plugin.ImageJ_Updater",
+                "shortcut": 0
+              },
+              {
+                "title": "Refresh Menus",
+                "code": "ij.plugin.ImageJ_Updater(\"menus\")",
+                "shortcut": 0
+              },
+              {
+                "title": "",
+                "type": "separator",
+                "code": "undefined",
+                "comment": "this is a separator"
+              },
+              {
+                "title": "About Plugins"
+              },
+              {
+                "title": "About JIM...",
+                "code": "ij.plugin.AboutBox()",
+                "shortcut": 0
+              }
+            ]
+          }
+        ]
+      }
+    }

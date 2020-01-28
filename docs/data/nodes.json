@@ -1,0 +1,568 @@
+[
+  {
+    "id": 1,
+    "class": "loader",
+    "name": "TWIP_NEW",
+    "description": "New...",
+    "help": "Create new Empty Image",
+    "properties": [
+      {"label": "Raster","output": "raster","name": "raster"},
+      {"label": "Type","select": ["8-bit","16-bit","32-bit","RGB"],"name": "type"},
+      {"label": "Fill","text": "rgb(0,0,0)","name": "fill"},
+      {"label": "Width","numerical": 256,"name": "width"},
+      {"label": "Height","numerical": 256,"name": "height"},
+      {"label": "NSlices","numerical": 1,"name": "nslices"}
+    ]
+  },
+  {
+    "id": 2,
+    "class": "loader",
+    "name": "TWIP_OPEN_RASTER",
+    "description": "Image...",
+    "properties": [
+      {"label": "Raster","output": "raster"},
+      {"label": "Image","select": ["TIFF","PNG","JPG","GIF"],"name": "format"},
+      {"label": "Open","file": "*"}
+    ]
+  },
+  {
+    "id": 3,
+    "class": "loader",
+    "name": "TWIP_IJ_SAMPLES",
+    "description": "Samples",
+    "help": "Load ImageJ Image/Stack Samples",
+    "preview": true,
+    "properties": [
+      {"label": "Raster","output": "raster"},
+      {
+        "label": "Open",
+        "select": [
+          "AuPbSn 40 (56K)",
+          "Blobs (25K)[B]",
+          "Boats (356K)",
+          "Bridge (174K)",
+          "Cell Colony (31K)",
+          "Clown (14K)",
+          "Dot Blot (7K)",
+          "Embryos (42K)",
+          "Gel (105K)",
+          "Leaf (36K)",
+          "Lena (68K)",
+          "Line Graph (21K)",
+          "Nile Bend (1.9M)",
+          "Particles (75K)",
+          "TEM Filter (112K)",
+          "Tree Rings (48K)"
+        ],
+        "source"  : [
+          "ij.plugin.URLOpener('AuPbSn40.jpg')"
+        ],
+        "zip": [
+          "Bat Cochlea Volume (19K)",
+          "Bat Cochlea Renderings (449K)"
+        ],
+        "name": "sample"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "class": "loader",
+    "name": "TWIP_TEST_IMAGE",
+    "description": "Test Images",
+    "help": "Create Test Images",
+    "properties": [
+      {"label": "Raster","output": "raster"},
+      {"label": "Type","select": ["None","Chessboard","Spiral","Wave"]},
+      {"label": "Width", "numerical": "256"},
+      {"label": "Height", "numerical": "256"}
+    ]
+  },
+  {
+    "id": 5,
+    "class": "loader",
+    "description": "Video Loader",
+    "help": "Load movie file as a stack of images",
+    "properties": [
+      {"label": "Raster","output": "raster"},
+      {"label": "Open","file": "video/mp4"}
+    ]
+  },
+  {
+    "id": 9,
+    "class": "loader",
+    "description": "Text Loader",
+    "properties": [
+      {"label": "Raster","output": "text"},
+      {"label": "Format","select": ["None","CSV","TSV","Text Image"]},
+      {"label": "Open","file": "text/csv,text/tsv"}
+    ]
+  },
+  {
+    "id": 11,
+    "class": "viewer",
+    "description": "2D Viewer",
+    "properties": [
+      {"label": "Backdrop","checkbox": false,"name": "backdrop"},
+      {"label": "Raster","input": "raster"}
+    ]
+  },
+  {
+    "id": 12,
+    "class": "viewer",
+    "description": "Stack Viewer",
+    "properties": [
+      {"label": "Raster","input": "raster"}
+    ]
+  },
+  {
+    "id": 13,
+    "class": "viewer",
+    "description": "Montage",
+    "properties": [
+      {"label": "Rows", "numerical": "auto"},
+      {"label": "Cols", "numerical": "auto"},
+      {"label": "Scale", "numerical": "auto"},
+      {"label": "Border", "numerical": "auto"},
+      {"label": "Labels", "checkbox": false},
+      {"label": "Raster","input": "raster"}
+    ]
+  },
+  {
+    "id": 14,
+    "class": "viewer",
+    "description": "3D Viewer",
+    "help": ["IsoSurface representation using the Marching Cubes Algorithm"],
+    "inputs": ["raster"],
+    "outputs": ["none"],
+    "properties": [
+      {"label": "Vector", "output": "vector"},
+      {"label": "threshold","numerical": "auto"},
+      {"label": "resolution", "numerical": 2},
+      {"label": "Raster","input": "raster"}
+    ]
+  },
+  {
+    "id": 15,
+    "class": "viewer",
+    "description": "Histogram",
+    "help": ["Histogram"],
+    "preview": true,
+    "properties": [
+      {"label": "Bins","numerical": "auto"},
+      {"label": "Min","numerical":  "auto"},
+      {"label": "Max","numerical":  "auto"},
+      {"label": "Backdrop", "checkbox": false},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 16,
+    "class": "viewer",
+    "description": "Data Plot",
+    "help": ["Curve"],
+    "properties": [
+      {"label": "X-axis","numerical": "auto"},
+      {"label": "Y-axis","numerical": "auto"},
+      {"label": "max","numerical": "auto"},
+      {"label": "Data", "input": "metadata"}
+    ]
+  },
+  {
+    "id": 20,
+    "class": "saver",
+    "description": "TIFF Saver",
+    "inputs": ["raster"],
+    "outputs": ["file"],
+    "properties": [
+      {"label": "Format",
+        "select": [
+          "Tiff...","Gif...","Jpeg...","Text Image...",
+          "ZIP...","Raw Data...","Image Sequence... ","Video... ",
+          "BMP...","PNG...","PGM...","FITS...",
+          "__disabled__ ──────────","LUT...","Selection...","XY Coordinates...","Results...","Text..."]
+      },
+      {"label": "Write","file": "image/tiff,image/tif"},
+      {"label": "Raster","input": "raster"}
+    ]
+  },
+  {
+    "id": 22,
+    "class": "converter",
+    "description": "Type",
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {"label": "To","select": ["Binary","8-bit","16-bit","32-bit","8-bit Color","RGB Color","RGB Stack","HSB Stack","Lab Stack"]},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 24,
+    "class": "converter",
+    "name": "TWIP_MERGE_COLORS",
+    "description": "Merge Colors",
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {"label": "ColorSpace","selectlayer": ["RGBA","HSVA"],"name": "colorspace"},
+      {"layer": "RGBA", "type": "input","properties": [
+        {"label": "Red", "input": "raster","name": "red"},
+        {"label": "Green", "input": "raster","name": "green"},
+        {"label": "Blue", "input": "raster","name": "blue"},
+        {"label": "Alpha", "input": "raster","name": "alpha"}
+      ]},
+      {"layer": "HSVA", "type": "input", "properties": [
+        {"label": "Hue", "input": "raster","name": "hue"},
+        {"label": "Saturation", "input": "raster","name": "saturation"},
+        {"label": "Value", "input": "raster","name": "value"},
+        {"label": "Alpha", "input": "raster","name": "alpha"}
+      ]}
+    ]
+  },
+  {
+    "id": 25,
+    "class": "converter",
+    "name": "TWIP_SPLIT_COLORS",
+    "description": "Split Colors",
+    "properties": [
+      {"layer": "RGBA", "type": "output","properties": [
+        {"label": "Red", "output": "raster","name": "red"},
+        {"label": "Green", "output": "raster","name": "green"},
+        {"label": "Blue", "output": "raster","name": "blue"},
+        {"label": "Alpha", "output": "raster","name": "alpha"}
+      ]},
+      {"layer": "HSVA", "type": "output", "properties": [
+        {"label": "Hue", "output": "raster","name": "hue"},
+        {"label": "Saturation", "output": "raster","name": "saturation"},
+        {"label": "Value", "output": "raster","name": "value"},
+        {"label": "Alpha", "output": "raster","name": "alpha"}
+      ]},
+      {"layer": "Luminance", "type": "output", "properties": [
+        {"label": "Luminance", "output": "raster","name": "luminance"}
+      ]},
+      {"layer": "Alpha", "type": "output", "properties": [
+        {"label": "Alpha", "output": "raster","name": "alpha"}
+      ]},
+      {"label": "ColorSpace","selectlayer": ["RGBA","HSVA","Luminance","Alpha"],"name": "colorspace"},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 27,
+    "class": "converter",
+    "name": "TWIP_THRESHOLD",
+    "description": "Threshold",
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {
+        "label": "Mode",
+        "select": [
+          "None","Default","Huang",
+          "Intermodes","IsoData","IJ_IsoData",
+          "Li",
+          "MaxEntropy","Mean","MinError","Minimum", "Moments",
+          "Otsu",
+          "Percentile",
+          "RenyiEntropy",
+          "Shanbhag",
+          "Triangle",
+          "Yen"
+        ],
+        "name": "mode"
+      },
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 31,
+    "class": "math",
+    "name": "TWIP_IMAGE_MATH",
+    "description": "Math",
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {"label":"Op.","select": ["None","Add","Subtract","Multiply","Divide"],"name": "op"},
+      {"label":"Value","numerical": 0,"input": "number","name": "value"},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 32,
+    "class": "math",
+    "description": "Math Macro",
+    "inputs": ["raster"],
+    "outputs": ["raster"],
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {"label":"v = ","text": "v","name": "macro"},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 33,
+    "class": "math",
+    "name": "TWIP_IMAGE_CALC",
+    "description": "Image Calc",
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {
+        "label": "Op.",
+        "select": ["None","Add","Subtract","Multiply","Divide","AND","OR","XOR","Min","Max","Average","Difference"],
+        "name": "op"
+      },
+      {"label": "Raster #1", "input": "raster"},
+      {"label": "Raster #2", "input": "raster"}
+    ]
+  },
+  {
+    "id": 33,
+    "class": "math",
+    "name": "TWIP_TRANSFORM",
+    "description": "Transform",
+    "preview": true,
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {"label": "Op.","selectlayer": ["None","Rot. 90","Flip","Rotate","Translate","Scale", "Matrix"],"name": "op"},
+      {"layer": "None", "type": "content","properties": []},
+      {"layer": "Rot. 90", "type": "content", "properties": [
+        {"label": "ClockWise", "checkbox": true,"name": "cw"}
+      ]},
+      {"layer": "Flip", "type": "content", "properties": [
+        {"label": ["Flip Vertically"],"checkbox": false,"name": "flipv"},
+        {"label": ["Flip Horizontally"],"checkbox": false,"name": "fliph"}
+      ]},
+      {"layer": "Rotate", "type": "content", "properties": [
+        {"label": "Angle (°)", "numerical": 0,"name": "angle"},
+        {"label": "Interpolation", "select": ["None","Bilinear","Bicubic"],"name": "interpolation"}
+      ]},
+      {"layer": "Translate", "type": "content", "properties": [
+        {"label": "TX", "numerical": 0,"name": "tx"},
+        {"label": "TY", "numerical": 0,"name": "ty"},
+        {"label": "Interpolation", "select": ["None","Bilinear","Bicubic"],"name": "interpolation"}
+      ]},
+      {"layer": "Scale", "type": "content", "properties": [
+        {"label": ["Scale X"],"numerical": 1,"name":"scalex"},
+        {"label": ["Scale Y"],"numerical": 1,"name":"scaley"},
+        {"label": ["Scale Z"],"numerical": 1,"name":"scalez"},
+        {"label": "Interpolation", "select": ["None","Bilinear","Bicubic"],"name": "interpolation"}
+      ]},
+      {"layer": "Matrix", "type": "content", "properties": [
+        {"label": "", "numerical": 1,"name": "m00"}, {"label": "", "numerical": 0,"name": "m00"},{"label": "", "numerical": 0,"name": "m00"}, {"label": "", "numerical": 0,"name": "m00"},
+        {"label": "", "numerical": 0,"name": "m00"}, {"label": "", "numerical": 1,"name": "m00"},{"label": "", "numerical": 0,"name": "m00"}, {"label": "", "numerical": 0,"name": "m00"},
+        {"label": "", "numerical": 0,"name": "m00"}, {"label": "", "numerical": 0,"name": "m00"},{"label": "", "numerical": 1,"name": "m00"}, {"label": "", "numerical": 0,"name": "m00"},
+        {"label": "", "numerical": 0,"name": "m00"}, {"label": "", "numerical": 0,"name": "m00"},{"label": "", "numerical": 0,"name": "m00"}, {"label": "", "numerical": 1,"name": "m00"}
+      ]},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 41,
+    "class": "morphology",
+    "name": "TWIP_BASIC_MM",
+    "description": "MM Basic",
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {"label":"Op.",  "select": ["Erode","Dilate","Open","Close"]},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 42,
+    "class": "morphology",
+    "name": "TWIP_ADV_MM",
+    "description": "MM Advanced",
+    "help": "Advanced Operators of Mathematical Morphology",
+    "properties": [
+      {"label": "Raster", "output": "raster"},
+      {"label":"Op.",  "select": ["None","Skeletonize...","Watershed","UEP","Close"]},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 50,
+    "class": "information",
+    "name": "TWIP_INFO",
+    "description": "Information",
+    "help": "Basic information about the Raster",
+    "properties": [
+      {"label": "Width", "readonly": -1,"output": "value","name":"width"},
+      {"label": "Height", "readonly": -1,"output": "value","name":"height"},
+      {"label": "NSlices", "readonly": -1,"output": "value","name":"nslices"},
+      {"label": "Bits/Pix", "readonly": -1,"output": "value","name":"bpp"},
+      {"label": "Unit", "readonly": "px","output": "value","name":"unit"},
+      {"label": "Pix.Size", "readonly": 1,"output": "value","name":"pixsize"},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 51,
+    "class": "information",
+    "name": "TWIP_STATS",
+    "description": "Statistics",
+    "help": "Basic Statistics",
+    "properties": [
+      {"label": "Count", "output": "value"},
+      {"label": "Min", "output": "value"},
+      {"label": "Max", "output": "value"},
+      {"label": "Mean", "output": "value"},
+      {"label": "Std.Dev.", "output": "value"},
+      {"label": "Mode", "output": "value"},
+      {"canvas": "histogram"},
+      {"label": "All Slices", "checkbox": false},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 60,
+    "class": "programming",
+    "description": "Variable",
+    "help": "Numeric node",
+    "properties": [
+      {"layer": "None", "type": "content","properties": []},
+      {"layer": "Number", "type": "content", "properties": [
+        {"label": "Number", "output": "number"},
+        {"label": "Number", "numerical": 0,"name": "number"}
+      ]},
+      {"layer": "String", "type": "content", "properties": [
+        {"label": "Text", "output": "string"},
+        {"label": "String", "text": "hello world!!","name": "string"}
+      ]},
+      {"label": "Op.","selectlayer": ["None","Number","String"],"name": "typevar"}
+    ]
+  },
+  {
+    "id": 62,
+    "class": "programming",
+    "description": "DataFlow",
+    "help": "Array Node",
+    "properties": [
+      {"label": "Flow", "output": "array"},
+      {"label": "0", "text": 1},
+      {"label": "1", "text": "hello"},
+      {"label": "2", "text": 3},
+      {"label": "Add" , "button": "+"}
+    ]
+  },
+  {
+    "id": 63,
+    "class": "programming",
+    "description": "Object",
+    "help": "Object Node",
+    "properties": [
+      {"label": "Object", "output": "object"},
+      {"label": "Property", "text": "0"},
+      {"label": "Add" , "button": "+"}
+    ]
+  },
+  {
+    "id": 64,
+    "class": "programming",
+    "name": "TWIP_MATHS",
+    "description": "Arithmetic",
+    "help": "Arithmetic operations",
+    "properties": [
+      {"label": "Number", "output": "number"},
+      {"label": "Op.", "select": ["None","Add","Subtract","Multiply","Divide","AND","OR","XOR","Average","Difference"]},
+      {"label": "Number #1", "input": "number"},
+      {"label": "Number #2", "input": "number"}
+    ]
+  },
+  {
+    "id": 65,
+    "class": "programming",
+    "name": "TWIP_MATHS_ADV",
+    "description": "Adv. Arithmetic",
+    "help": "Log and Trigonometric operations",
+    "properties": [
+      {"label": "Number", "output": "number"},
+      {"label": "Op.", "select": ["None","cos","sin","tan","acos","asin","atan","tanh","log","ln"]},
+      {"label": "Number", "input": "number"}
+    ]
+  },
+  {
+    "id": 66,
+    "class": "programming",
+    "name": "TWIP_IFTHENELSE",
+    "description": "Conditional",
+    "help": "if <condition> then <do-something> else <do-something-else>",
+    "properties": [
+      {"label": "Then", "output": "number"},
+      {"label": "Else", "output": "number"},
+      {"label": "If", "text": "v == 3"},
+      {"label": "Number", "input": "number"}
+    ]
+  },
+  {
+    "id": 70,
+    "class": "programming",
+    "name": "TWIP_DEBUG",
+    "description": "Flow Controls",
+    "help": "Python function range(..)",
+    "properties": [
+      {"label": "Data", "output": "data"},
+      {"label": "Controls", "flowcontrols": 31},
+      {"label": "Flow", "input": "data"}
+    ]
+  },
+  {
+    "id": 71,
+    "class": "programming",
+    "name": "TWIP_RANGE",
+    "description": "Range",
+    "help": "Python function range(..)",
+    "properties": [
+      {"label": "Flow", "output": "data"},
+      {"label": "Start", "numerical": 0},
+      {"label": "Stop", "numerical": 10},
+      {"label": "Step", "numerical": 1}
+    ]
+  },
+  {
+    "id": 72,
+    "class": "programming",
+    "name": "TWIP_FILTER_FUNC",
+    "description": "Filter Func",
+    "help": "functional programming filter(..)",
+    "properties": [
+      {"label": "Data", "output": "data"},
+      {"label": "Code", "output": "code"},
+      {"label": "Array", "input": "array"}
+    ]
+  },
+  {
+    "id": 66,
+    "class": "programming",
+    "description": "Get...",
+    "help": "Get an array of data (slices, pixels, etc.)",
+    "properties": [
+      {"label": "Array", "output": "array"},
+      {"label": "Feature", "select": ["none","Pixels","Columns","Rows","Z-Slices","Y-Slices","X-Slices"]},
+      {"label": "Range", "text": "all"},
+      {"label": "Raster", "input": "raster"}
+    ]
+  },
+  {
+    "id": 100,
+    "class": "filter",
+    "description": "Filter 2D",
+    "preview": true,
+    "properties": [
+      {"label": "Raster 2D+", "output": "raster"},
+      {"label": "Op.", "select": ["Gaussian Blur","Median","Mean","Minimum","Maximum","Unsharp Mask","Variance"]},
+      {"label": "Radius", "numerical": 2},
+      {"label": "All Slices", "checkbox": false},
+      {"label": "Raster 2D+", "input": "raster"}
+    ]
+  },
+  {
+    "id": 101,
+    "class": "filter",
+    "description": "Edge Detection",
+    "preview": true,
+    "properties": [
+      {"label": "Raster 2D+", "output": "raster"},
+      {"label": "Op.", "select": ["Sobel","Laplace"]},
+      {"label": "Radius", "numerical": 2},
+      {"label": "All Slices", "checkbox": false},
+      {"label": "Raster 2D+", "input": "raster"}
+    ]
+  }
+]

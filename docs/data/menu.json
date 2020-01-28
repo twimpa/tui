@@ -1,0 +1,532 @@
+{
+  "type": "topmenu",
+  "children": [
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-sign-in fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Inputs",
+      "children": [
+        {
+          "type": "item",
+          "label": "New...",
+          "icon": "<i class=\"fa fa-file-o fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "inputs",
+          "onclick": "TWIP_NEW"
+        },
+        {
+          "type": "submenu",
+          "label": "Samples",
+          "icon": "<i class=\"fa fa-book fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "inputs",
+          "children": [
+            {
+              "type": "item",
+              "label": "ImageJ Samples",
+              "category": "samples",
+            "onclick": "TWIP_IJ_SAMPLES"
+            },
+            {
+              "type": "item",
+              "label": "Test Images",
+              "category": "samples",
+            "onclick": "TWIP_TEST_IMAGE"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Open...",
+          "icon": "<i class=\"fa fa-file-image-o fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "inputs",
+          "children": [
+            {
+              "type": "item",
+              "label": "Open Raster",
+              "category": "opener",
+              "onclick": "TWIP_OPEN_RASTER"
+            },
+            {
+              "type": "item",
+              "label": "Open MetaData",
+              "category": "inputs",
+              "onclick": "TWIP_OPEN_METADATA"
+            },
+            {
+              "type": "item",
+              "label": "Open Vectors",
+              "category": "inputs",
+              "onclick": "TWIP_OPEN_VECTOR"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Stream",
+          "icon": "<i class=\"fa fa-film fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "inputs",
+          "children": [
+            {
+              "type": "item",
+              "label": "Webcam",
+              "category": "inputs",
+              "onclick": "TWIP_OPEN_WEBCAM"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-sign-out fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Outputs",
+      "children": [
+        {
+          "type": "submenu",
+          "label": "Console",
+          "icon": "<i class=\"fa fa-desktop fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "outputs",
+          "children": [
+            {
+              "type": "item",
+              "label": "Log",
+              "category": "image",
+              "onclick": "TWIP_SHOW_LOG"
+            },
+            {
+              "type": "item",
+              "label": "Table",
+              "category": "image",
+              "onclick": "TWIP_SHOW_TABLE"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Plots",
+          "icon": "<i class=\"fa fa-line-chart fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "outputs",
+          "children": []
+        },
+        {
+          "type": "submenu",
+          "label": "Viewers",
+          "icon": "<i class=\"fa fa-eye fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "outputs",
+          "children": [
+            {
+              "type": "item",
+              "label": "2D",
+              "category": "image",
+              "onclick": "TWIP_VIEWER_2D"
+            },
+            {
+              "type": "item",
+              "label": "3D",
+              "category": "image",
+              "onclick": "TWIP_VIEWER_3D"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-picture-o fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Image",
+      "children": [
+        {
+          "type": "item",
+          "label": "Calculator",
+          "icon": "<i class=\"fa fa-calculator fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "image",
+          "onclick": "TWIP_IMAGE_CALC"
+        },
+        {
+          "type": "submenu",
+          "icon": "<i class=\"fa fa-tint fa-lg\" aria-hidden=\"true\"></i>",
+          "label": "Colors",
+          "children": [
+            {
+              "type": "item",
+              "label": "Split Channels",
+              "category": "colors",
+              "onclick": "TWIP_SPLIT_COLORS"
+            },
+            {
+              "type": "item",
+              "label": "Merge Channels",
+              "category": "colors",
+              "onclick": "TWIP_MERGE_COLORS"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "icon": "<i class=\"fa fa-cogs fa-lg\" aria-hidden=\"true\"></i></i>",
+          "label": "Distort",
+          "children": [
+            {
+              "type": "item",
+              "label": "Crop",
+              "category": "distort",
+              "onclick": "TWIP_CROP"
+            },
+            {
+              "type": "item",
+              "label": "Flip",
+              "category": "distort",
+              "onclick": "TWIP_FLIP"
+            },
+            {
+              "type": "item",
+              "label": "Rotate",
+              "category": "distort",
+              "onclick": "TWIP_ROTATE"
+            },
+            {
+              "type": "item",
+              "label": "Scale",
+              "category": "distort",
+              "onclick": "TWIP_SCALE"
+            },
+            {
+              "type": "item",
+              "label": "Transform",
+              "category": "distort",
+              "onclick": "TWIP_TRANSFORM"
+            },
+            {
+              "type": "item",
+              "label": "Translate",
+              "category": "distort",
+              "onclick": "TRANSLATE"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "icon": "<i class=\"fa fa-lightbulb-o fa-lg\" aria-hidden=\"true\"></i>",
+          "label": "Enhancer",
+          "children": [
+            {
+              "type": "item",
+              "label": "Bright/Contrast",
+              "category": "converter",
+              "onclick": "TWIP_BRIGHT_CONTRAST"
+            },
+            {
+              "type": "item",
+              "label": "Normalize",
+              "category": "converter",
+              "onclick": "TWIP_NORMALIZE"
+            },
+            {
+              "type": "item",
+              "label": "Equalize",
+              "category": "converter",
+              "onclick": "TWIP_EQUALIZE"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Filters",
+          "icon": "<i class=\"fa fa-hourglass-start fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "image",
+          "children": [
+            {
+              "type": "item",
+              "label": "Convolve",
+              "category": "filter",
+              "onclick": "TWIP_CONVOLVE"
+            },
+            {
+              "type": "item",
+              "label": "Denoising",
+              "category": "filter",
+              "onclick": "TWIP_DENOISE"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Fourier Transf.",
+          "icon": "<i class=\"fa fa-signal fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "image",
+          "children": [
+            {
+              "type": "item",
+              "label": "FFT",
+              "category": "filter",
+              "onclick": "TWIP_FFT"
+            },
+            {
+              "type": "item",
+              "label": "FFT Math",
+              "category": "filter",
+              "onclick": "TWIP_FFT_MATH"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Math. Morph.",
+          "icon": "<i class=\"fa fa-adjust fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "image",
+          "children": [
+            {
+              "type": "item",
+              "label": "Basic",
+              "category": "Math. Morph.",
+              "onclick": "TWIP_BASIC_MM"
+            },
+            {
+              "type": "item",
+              "label": "Advanced",
+              "category": "detection",
+              "onclick": "TWIP_ADV_MM"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Select",
+          "icon": "<i class=\"fa fa-object-group fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "image",
+          "children": [
+            {
+              "type": "item",
+              "label": "To Stack...",
+              "category": "image",
+              "onclick": "TWIP_TO_STACK"
+            },
+            {
+              "type": "item",
+              "label": "Region of Interest",
+              "category": "image",
+              "onclick": "TWIP_ROI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-clone fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Stack",
+      "children": [
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-cube fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "3D",
+      "children": []
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-table fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "MetaData",
+      "children": [
+        {
+          "type": "submenu",
+          "label": "ML",
+          "icon": "<i class=\"fa fa-microchip fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "Machine Learning",
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-bar-chart fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Vector",
+      "children": []
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-wrench fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Tools",
+      "children": [
+        {
+          "type": "item",
+          "label": "Duplicate",
+          "category": "tools",
+          "onclick": "TWIP_DUPLICATE"
+        },
+        {
+          "type": "item",
+          "label": "Histogram",
+          "category": "tools",
+          "onclick": "TWIP_HISTOGRAM"
+        },
+        {
+          "type": "item",
+          "label": "Information",
+          "category": "tools",
+          "onclick": "TWIP_INFO"
+        },
+        {
+          "type": "item",
+          "label": "Add Noise",
+          "category": "tools",
+          "onclick": "TWIP_NOISE"
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-puzzle-piece fa-lg\"></i>",
+      "label": "Segmentation",
+      "children": [
+        {
+          "type": "submenu",
+          "label": "Detection",
+          "icon": "<i class=\"fa fa-search fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "segmentation",
+          "children": [
+            {
+              "type": "item",
+              "label": "Blobs",
+              "category": "detection",
+              "onclick": "TWIP_BLOBS"
+            },
+            {
+              "type": "item",
+              "label": "Corners",
+              "category": "detection",
+              "onclick": "TWIP_CORNER"
+            },
+            {
+              "type": "item",
+              "label": "Edges",
+              "category": "detection",
+              "onclick": "TWIP_EDGE"
+            },
+            {
+              "type": "item",
+              "label": "Find Max.",
+              "icon": "<i class=\"fa fa-th fa-lg\" aria-hidden=\"true\"></i>",
+              "category": "detection",
+              "onclick": "TWIP_FIND_MAX"
+            },
+            {
+              "type": "item",
+              "label": "Lines (HT)",
+              "category": "detection",
+              "onclick": "TWIP_HOUGH"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Clustering",
+          "icon": "<i class=\"fa fa-commenting-o fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "segmentation",
+          "children": [
+            {
+              "type": "item",
+              "label": "K-Means",
+              "category": "segmentation",
+              "onclick": "TWIP_KMEANS"
+            },
+            {
+              "type": "item",
+              "label": "SuperPixels",
+              "category": "segmentation",
+              "onclick": "TWIP_SLIC"
+            }
+          ]
+        },
+        {
+          "type": "submenu",
+          "label": "Thresholding",
+          "icon": "<i class=\"fa fa-thermometer-half fa-lg\" aria-hidden=\"true\"></i>",
+          "category": "segmentation",
+          "children": [
+            {
+              "type": "item",
+              "label": "Threshold Auto",
+              "category": "thresholding",
+              "onclick": "TWIP_THRESHOLD"
+            },
+            {
+              "type": "item",
+              "label": "Threshold Double",
+              "category": "thresholding",
+              "onclick": "TWIP_THRESHOLD_DOUBLE"
+            },
+            {
+              "type": "item",
+              "label": "To Binary",
+              "category": "thresholding",
+              "onclick": "TWIP_TO_BINARY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-sitemap fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Analysis",
+      "children": [
+        {
+          "type": "item",
+          "label": "Analyse Particles",
+          "category": "analysis",
+          "onclick": "TWIP_ANALYZE"
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-keyboard-o fa-lg\" aria-hidden=\"true\"></i>",
+      "label": "Programming",
+      "children": [
+        {
+          "type": "item",
+          "label": "Arithmetic",
+          "category": "programming",
+          "onclick": "TWIP_MATHS"
+        },
+        {
+          "type": "item",
+          "label": "Debugging",
+          "category": "programming",
+          "onclick": "TWIP_DEBUG"
+        },
+        {
+          "type": "item",
+          "label": "Filter Func",
+          "category": "programming",
+          "onclick": "TWIP_FILTER_FUNC"
+        },
+        {
+          "type": "item",
+          "label": "If..Then..Else",
+          "category": "programming",
+          "onclick": "TWIP_IFTHENELSE"
+        },
+        {
+          "type": "item",
+          "label": "Range",
+          "category": "programming",
+          "onclick": "TWIP_RANGE"
+        },
+        {
+          "type": "item",
+          "label": "Set Data",
+          "category": "programming",
+          "onclick": "TWIP_SET_VALUE"
+        }
+      ]
+    },
+    {
+      "type": "submenu",
+      "icon": "<i class=\"fa fa-question-circle fa-lg\"></i>",
+      "label": "Help",
+      "children": []
+    }
+  ]
+}
